@@ -290,7 +290,7 @@ h1, h2, h3 {
 }
 .project-detail{
     padding: 50px 0% 50px;
-    width:101%;
+    //width:101%;
     text-align: center;
     background: #ddd;
 }

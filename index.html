@@ -42,8 +42,8 @@
     </header>
     <!-- banner text -->
     <div class="banner-content">
-      <div class="row" style="width:100%">
-        <div class="col-md-8" style="padding: 9% 10px 10px 9%;">
+      <div class="row">
+        <div class="col-md-8" style="padding: 9% 30px 0px;">
           <h1 class="banner-head">We are one of the best building contractors in Chennai.</h1>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis voluptas dolores nulla! Quasi cumque numquam, tenetur hic laboriosam, eveniet, necessitatibus enim quae cupiditate dicta harum consectetur corrupti debitis totam fugiat.
           </p>
@@ -89,7 +89,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="contact-title"><span>Please explain your requirement</span></div>
-                <div class="calc-input-wrapper"><textarea name="Requirement" class="calc-input"></textarea></div>
+                <div class="calc-input-wrapper"><textarea name="message" class="calc-input"></textarea></div>
               </div>
             </div>
             
@@ -518,7 +518,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="contact-title"><span>Yout message (optional)</span></div>
-            <div class="calc-input-wrapper"><textarea name="Requirement" class="calc-input"></textarea></div>
+            <div class="calc-input-wrapper"><textarea name="message" class="calc-input"></textarea></div>
           </div>
         </div>
       </div>
@@ -628,6 +628,9 @@
     </div>
 
   </div>
+
+
+  <script src="https://web3forms.com/client/script.js" async defer></script>
                 
   <script type="text/javascript">
     $( document ).ready(function() {
@@ -657,16 +660,19 @@
         $('[data-id="totalConstructCost"]').html('<b>₹ ' + totalConstructCost + '</b>')
       })
 
-      $('body').on('click', '#submitRequest', function(){
+      $('body').on('click', '#submitRequest', function(e){
         let parentNode = $(this).closest('.contact-form');
         let formDetails = {};
+        const formData = new FormData();
         $('#contactForm').find('input, textarea').each(function(){
           if ($(this)[0].hasAttribute('data-required') && $(this).val().trim() == ''){
             $(this).addClass('')
           }
-          formDetails[$(this).attr('name')] = $(this).val();
+          formDetails[$(this).attr('name').toLocaleLowerCase()] = $(this).val();
+          formData.append($(this).attr('name').toLocaleLowerCase(), $(this).val())
         })
-        console.log(formDetails);
+        e.preventDefault();
+        sendEmail(json)
       })
       
       $('body').on('click', '#submitQuote', function(){
@@ -686,19 +692,58 @@
           
           emailBody += 'Looking forward to hearing back from you.' + '\n';
           emailBody += 'Thanks in advance';
-          $('#quoteForm textarea[name="Requirement"]').val(emailBody)
+          $('#quoteForm textarea[name="message"]').val(emailBody)
           $('#quoteForm').removeClass('d-none')
         }else{
           let formDetails = {};
+          const formData = new FormData();
           $('.quote-form').find('input, textarea').each(function(){
             if ($(this)[0].hasAttribute('data-required') && $(this).val().trim() == ''){
               $(this).addClass('')
             }
             formDetails[$(this).attr('name')] = $(this).val();
+            formData.append($(this).attr('name').toLocaleLowerCase(), $(this).val());
           })
           console.log(formDetails);
         }
       })
+
+      function sendEmail(formData){
+        formData.append('access_key', '756ef301-08cc-4cf2-856d-6178abe7b758')
+
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+        console.log(json);
+        //return;
+        fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    //result.innerHTML = "Form submitted successfully";
+                } else {
+                    console.log(response);
+                    //result.innerHTML = json.message;
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                //result.innerHTML = "Something went wrong!";
+            })
+            .then(function() {
+              console.log('ok completed')
+                  //form.reset();
+                  setTimeout(() => {
+                      //result.style.display = "none";
+                  }, 3000);
+              });
+      }
 
       /*$('#myCarousel').carousel({
         interval: 10000
