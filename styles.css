@@ -376,5 +376,7 @@ h1, h2, h3 {
 }
 .carousel-item .img-fluid{
     width: auto !important;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
     max-height: 310px !important;
 }
