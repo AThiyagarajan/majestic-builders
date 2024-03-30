@@ -672,7 +672,7 @@
           formData.append($(this).attr('name').toLocaleLowerCase(), $(this).val())
         })
         e.preventDefault();
-        sendEmail(json)
+        sendEmail(formData)
       })
       
       $('body').on('click', '#submitQuote', function(){
@@ -705,6 +705,7 @@
             formData.append($(this).attr('name').toLocaleLowerCase(), $(this).val());
           })
           console.log(formDetails);
+          sendEmail(formData)
         }
       })
 
