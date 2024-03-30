@@ -217,6 +217,9 @@ h1, h2, h3 {
     text-align: right;
 }
 
+.banner-content > .row{
+    margin: 0px;
+}
 .banner-head{
     font-size: 70px;
     font-weight: 500;
@@ -291,7 +294,7 @@ h1, h2, h3 {
 }
 .project-detail{
     padding: 50px 0% 50px;
-    //width:101%;
+    margin: 0px;
     text-align: center;
     background: #ddd;
 }
@@ -317,29 +320,8 @@ h1, h2, h3 {
 .footer-container .contact-info p{
     margin: 0px;
 }
-/*.carousel-inner .active.left  { left: -33%;             }
-.carousel-inner .active.right { left: 33%;              }
-.carousel-inner .next         { left: 33%               }
-.carousel-inner .prev         { left: -33%              }
-.carousel-control.left        { background-image: none; }
-.carousel-control.right       { background-image: none; }
-.carousel-inner .item         { background: white;      }
-.carousel-inner img{
-    display: block;
-    height: auto;
-    max-width: 100%;
-}
-.carousel-inner>.item {
-    position: relative;
-    display: none;
-    -webkit-transition: .6s ease-in-out left;
-    transition: .6s ease-in-out left;
-}
-.carousel-inner>.active, .carousel-inner>.next, .carousel-inner>.prev {
-    display: block;
-}*/
 
-@media (max-width: 576px){
+@media (max-width: 768px){
     .calc-div {
         display: block !important;
     }
@@ -350,4 +332,49 @@ h1, h2, h3 {
     .calc-col-val {
         margin-top: 12px !important;
     }
+    .vendors > div{
+        margin-bottom: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* display 3 */
+@media (min-width: 768px) {
+    
+    .carousel-inner .carousel-item-right.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(33.333%);
+    }
+    
+    .carousel-inner .carousel-item-left.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-33.333%);
+    }
+}
+
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left{ 
+  transform: translateX(0);
+}
+
+.carousel-item .card-body{
+    min-height: 350px !important;
+}
+.carousel-item .img-fluid{
+    width: auto !important;
+    max-height: 310px !important;
 }
