@@ -116,7 +116,7 @@ h1, h2, h3 {
     
     background-color: #EFF4F4FF !important;
     padding: 46px 40px 40px 40px !important;
-    margin: 0px 0px 0px 0px !important;
+    margin: 0px 0px 0px 0px;
     border-radius: 20px !important;
     border: 2px solid #0000001A !important;
     -webkit-box-shadow: 0px 0px 0px #ffffff;
@@ -337,3 +337,16 @@ h1, h2, h3 {
 .carousel-inner>.active, .carousel-inner>.next, .carousel-inner>.prev {
     display: block;
 }*/
+
+@media (max-width: 576px){
+    .calc-div {
+        display: block !important;
+    }
+    .calc-col {
+        display: block !important;
+        width: 100%;
+    }
+    .calc-col-val {
+        margin-top: 12px !important;
+    }
+}
